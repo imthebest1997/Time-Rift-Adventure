@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Rigidbody2D rb;
-
-    //Vida de Hiroshi
-    [SerializeField] Image barHealth;
-    [SerializeField] float currentHealth = 100f;
-    [SerializeField] float maximumHealth = 100f;
+    BoxCollider2D boxCollider;
+    private Vector2 originalSizeBC;
 
     //Ataque
     private float attackTimer = 0f; // Temporizador para rastrear la duración del ataque
@@ -27,7 +25,13 @@ public class Player : MonoBehaviour
     private bool isJumpping = false; // Variable de estado para controlar el estado del ataque
     private int jumpCount = 0; // Contador de saltos
 
+    [SerializeField] GameManager gameManager;
 
+    private void Start()
+    {
+        boxCollider = GetComponent<BoxCollider2D>();
+        originalSizeBC = boxCollider.size;
+    }
     void Update()
     {
         //Movimiento del personaje
@@ -47,7 +51,7 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
                 rb.AddForce(0.8f * salto * Vector2.up, ForceMode2D.Impulse);
-                isJumpping = true;
+//                isJumpping = true;
             }
             //Salto Inicial
             else
@@ -55,9 +59,8 @@ public class Player : MonoBehaviour
                 rb.AddForce(Vector2.up * salto, ForceMode2D.Impulse);
             }
 
-            /*            isJumpping = true;
-                        jumpTimer = 0f;
-            */
+            isJumpping = true;
+            animator.SetBool("Saltar", true);
             jumpCount++;
         }
 
@@ -67,7 +70,7 @@ public class Player : MonoBehaviour
             jumpTimer += Time.deltaTime;
             if (jumpTimer >= jumpDuration)
             {
-//                animator.SetBool("Saltar", false);
+                animator.SetBool("Saltar", false);
                 isJumpping = false;
             }
         }
@@ -78,6 +81,17 @@ public class Player : MonoBehaviour
             animator.SetBool("SimpleAttack", true);
             isAttacking = true;
             attackTimer = 0f;
+                
+            //Modificar el tamaño del Collider para realizar mejor la colision y el ataque
+            float newColliderSizeX = boxCollider.size.x * 1.35f;
+            float colliderSizeY = boxCollider.size.y;
+
+            //Redimensionar el collider solo en x
+            Vector2 newColliderSize = new Vector2(newColliderSizeX, colliderSizeY);
+            boxCollider.size = newColliderSize;
+
+            //Restablecer el tamaño del Collider
+            Invoke("RestoreColliderSize", 1f);
         }
 
         //Comprobar si la animación de ataque esta en proceso
@@ -102,21 +116,47 @@ public class Player : MonoBehaviour
         }
     }
 
-    //TODO: Optional (Review it)
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Me ha reducido vida un enemigo");
-            ReducirVida(15f);
+            if (isAttacking)
+            {
+                print("Esta atacando");
+                // El jugador ha atacado al enemigo
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                print("Me choque");
+                // El jugador ha chocado con el enemigo sin atacar
+                gameManager.ReducirVida(15f);
+            }
         }
     }
-    
-    //100% Funcional
-    private void ReducirVida(float amount)
+
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        currentHealth -= amount;
-        currentHealth = Mathf.Clamp(currentHealth, 0f, maximumHealth);
-        barHealth.fillAmount = currentHealth / maximumHealth;
-    }    
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (isAttacking)
+            {
+                print("Esta atacando");
+                // El jugador ha atacado al enemigo
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                print("Me choque");
+                // El jugador ha chocado con el enemigo sin atacar
+                gameManager.ReducirVida(15f * Time.deltaTime);
+            }
+        }
+    }
+
+    void RestoreColliderSize()
+    {
+        boxCollider.size = originalSizeBC;
+    }
+
 }
