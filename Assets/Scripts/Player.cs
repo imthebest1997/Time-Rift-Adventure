@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private float jumpTimer = 0f; // Temporizador para rastrear la duración del ataque
     readonly float jumpDuration = 0.15f; // Duración del ataque en segundos
     private bool isJumpping = false; // Variable de estado para controlar el estado del ataque
-    int numVecesSalto = 0;
+    private int jumpCount = 0; // Contador de saltos
 
 
     void Update()
@@ -40,33 +40,37 @@ public class Player : MonoBehaviour
 
 
         //Salto del personaje
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumpping && CheckGround.isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumpping && (jumpCount < 2 || CheckGround.isGrounded))
         {
-            animator.SetBool("Saltar", true);
-            animator.SetBool("Run", false);
-            rb.AddForce(Vector2.up * salto, ForceMode2D.Impulse);
-            isJumpping = true;
-            jumpTimer = 0f;
-
-            numVecesSalto++;
-
-            if(numVecesSalto == 2)
+            //Salto consecutivo
+            if (jumpCount == 1)
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(0.8f * salto * Vector2.up, ForceMode2D.Impulse);
+                isJumpping = true;
+            }
+            //Salto Inicial
+            else
             {
                 rb.AddForce(Vector2.up * salto, ForceMode2D.Impulse);
-                numVecesSalto = 0;
             }
+
+            /*            isJumpping = true;
+                        jumpTimer = 0f;
+            */
+            jumpCount++;
         }
 
         //Comprobar si la animación de salto esta en proceso
         if (isJumpping)
         {
             jumpTimer += Time.deltaTime;
-            if(jumpTimer >= jumpDuration) {
-                animator.SetBool("Saltar", false);
-                isJumpping = false;            
+            if (jumpTimer >= jumpDuration)
+            {
+//                animator.SetBool("Saltar", false);
+                isJumpping = false;
             }
         }
-
 
         //Ataque del personaje
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking)
@@ -88,16 +92,19 @@ public class Player : MonoBehaviour
                 isAttacking = false;
             }
         }
+
+        //Cuando el jugador toca el suelo el contador de saltos se reinicia
+        if (CheckGround.isGrounded)
+        {
+            animator.SetBool("Saltar", false);
+            isJumpping = false;
+            jumpCount = 0; // Reiniciar el contador de saltos cuando toque el suelo
+        }
     }
 
     //TODO: Optional (Review it)
     private void OnCollisionEnter2D(Collision2D collision)
     {
-/*        if(collision.gameObject.CompareTag("Suelo"))
-        {
-            animator.SetBool("Saltar", false);
-        }
-*/
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("Me ha reducido vida un enemigo");
