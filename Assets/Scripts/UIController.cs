@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] GameObject loseScreen;
+    [SerializeField] GameObject gameOverScreen;
     [SerializeField] GameObject winnerScreen;
-    [SerializeField] GameObject []hearts;
-    [SerializeField] Text gameTimeUI;
-    public void ActivateLoseScreen()
+    [SerializeField] Text gameScoreUI;
+
+    public void ActivateGameOverScreen()
     {
-        loseScreen.SetActive(true);
+        gameOverScreen.SetActive(true);
     }
 
     public void ActivateWinnerScreen()
@@ -32,26 +32,8 @@ public class UIController : MonoBehaviour
     }
 
 
-    public void UpdateLives(int currentLives)
-    {
-        //3 vidas en el arreglo
-        //2 vidas
-        for(int i = 0; i < hearts.Length; i++)
-        {
-            //Si tienes una vida perdida, se va a quitar la imagen de la vida activa
-            if(i >= currentLives)
-            {
-                hearts[i].SetActive(false);
-            }
-        }
-    }
-
-    public void PrintTimeElapsed(float timeElapsed)
-    {
-        //int minutos = (int)(timeElapsed / 60);
-        //float segundosRestantes = timeElapsed % 60;
-        //string tiempoFormateado = "Time: " + minutos.ToString("00") + ":" + segundosRestantes.ToString("00.000");
-        
-        gameTimeUI.text = "Time: " + Mathf.Floor(timeElapsed) + " segundos";//Mostrar tiempo
+    public void PrintScore(float score)
+    {        
+        gameScoreUI.text = "Score: " + Mathf.Floor(score) + " pts";//Mostrar tiempo
     }
 }

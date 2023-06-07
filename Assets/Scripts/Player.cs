@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
+        
         //Movimiento del personaje
         float movement = Input.GetAxis("Horizontal");
         animator.SetBool("Run", Mathf.Abs(movement) > 0);// Comprobar si hay movimiento y establecer el parámetro "Run" del animador.
@@ -51,7 +52,6 @@ public class Player : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
                 rb.AddForce(0.8f * salto * Vector2.up, ForceMode2D.Impulse);
-//                isJumpping = true;
             }
             //Salto Inicial
             else
@@ -114,6 +114,12 @@ public class Player : MonoBehaviour
             isJumpping = false;
             jumpCount = 0; // Reiniciar el contador de saltos cuando toque el suelo
         }
+
+        //Verificar cuando el jugador se cae al vacio
+        if(transform.position.y <= -1.19)
+        {
+            gameManager.VaciarVida();
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -122,13 +128,11 @@ public class Player : MonoBehaviour
         {
             if (isAttacking)
             {
-                print("Esta atacando");
                 // El jugador ha atacado al enemigo
                 Destroy(collision.gameObject);
             }
             else
             {
-                print("Me choque");
                 // El jugador ha chocado con el enemigo sin atacar
                 gameManager.ReducirVida(15f);
             }
@@ -141,13 +145,11 @@ public class Player : MonoBehaviour
         {
             if (isAttacking)
             {
-                print("Esta atacando");
                 // El jugador ha atacado al enemigo
                 Destroy(collision.gameObject);
             }
             else
             {
-                print("Me choque");
                 // El jugador ha chocado con el enemigo sin atacar
                 gameManager.ReducirVida(15f * Time.deltaTime);
             }

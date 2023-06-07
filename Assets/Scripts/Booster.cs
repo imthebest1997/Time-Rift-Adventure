@@ -2,20 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crystal : MonoBehaviour
+public class Booster : MonoBehaviour
 {
+    [SerializeField] float value;
     GameManager gameManager;
-    private void Start()
+
+    void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (gameManager != null)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                gameManager.UpdateScore(25);//Al tomar un cristal gano 25 puntos
+                gameManager.RegenerarVida(value);//Al tomar un cristal gano 25 puntos
                 Destroy(gameObject);
             }
         }
