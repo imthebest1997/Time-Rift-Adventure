@@ -42,9 +42,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -115,7 +115,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Newt Slinger Attack_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 7
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0f52bba6bb586f4cae84c6ffb1f383a
+      internalID: 1576583305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_1
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 7
+        width: 27
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f924d874dc5ef784e868eab47c18c812
+      internalID: 974578287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_2
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 7
+        width: 26
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 536a6af73dc8f144e9921d6c975d98d2
+      internalID: 722800109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_3
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 7
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4113b47af7e86f4bba97badd325353b
+      internalID: 1833895905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_4
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 7
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 289d42ba19d0dde44931d93f863c3f31
+      internalID: 26516535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_5
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 7
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280e45e074b041b4ca4599c12b967529
+      internalID: 361233699
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_6
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 7
+        width: 31
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b60f317821b1ce4cac4a870b89d1234
+      internalID: -833305093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_7
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 7
+        width: 36
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5692bb2526574a74c917b577400292e2
+      internalID: -442786757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Newt Slinger Attack_8
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 7
+        width: 28
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91c3d69161d948b41b6a0badedce8c88
+      internalID: 617449232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +315,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Newt Slinger Attack_0: 1576583305
+      Newt Slinger Attack_1: 974578287
+      Newt Slinger Attack_2: 722800109
+      Newt Slinger Attack_3: 1833895905
+      Newt Slinger Attack_4: 26516535
+      Newt Slinger Attack_5: 361233699
+      Newt Slinger Attack_6: -833305093
+      Newt Slinger Attack_7: -442786757
+      Newt Slinger Attack_8: 617449232
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

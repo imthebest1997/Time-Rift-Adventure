@@ -137,6 +137,24 @@ public class Player : MonoBehaviour
                 gameManager.ReducirVida(15f);
             }
         }
+
+        if (collision.gameObject.CompareTag("FinalBoss"))
+        {
+            if (isAttacking)
+            {
+                gameManager.NumVidas--;
+                if (gameManager.NumVidas == 0)
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
+            else
+            {
+                // El jugador ha chocado con el enemigo sin atacar
+                gameManager.ReducirVida(15f);
+            }
+        }
+
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -154,6 +172,24 @@ public class Player : MonoBehaviour
                 gameManager.ReducirVida(15f * Time.deltaTime);
             }
         }
+
+        if (collision.gameObject.CompareTag("FinalBoss"))
+        {
+            if (isAttacking)
+            {
+                gameManager.NumVidas--;
+                if(gameManager.NumVidas == 0)
+                {
+                    Destroy(collision.gameObject);
+                }
+            }
+            else
+            {
+                // El jugador ha chocado con el enemigo sin atacar
+                gameManager.ReducirVida(15f * Time.deltaTime);
+            }
+        }
+
     }
 
     void RestoreColliderSize()

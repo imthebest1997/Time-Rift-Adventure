@@ -12,7 +12,6 @@ public class DamageObject : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             gameManager.ReducirVida(20);
-            Debug.Log("Player Damaged");
         }
     }
 }

@@ -14,24 +14,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] bool jump = false;
     Rigidbody2D rb;
 
-/*    GameObject nativeMan;
-    SpriteRenderer spriteRendererNM;
-
-    GameObject snake;
-    SpriteRenderer spriteRendererS;
-*/
-
     void Start()
     {
         contadorTiempo = tiempoParaCambiar;
         rb = GetComponent<Rigidbody2D>();
 
-/*        nativeMan = GameObject.Find("NativeMan");
-        spriteRendererNM = nativeMan.GetComponent<SpriteRenderer>();
-
-        snake = GameObject.Find("Snake");
-        spriteRendererS = snake.GetComponent<SpriteRenderer>();
-*/        
         //Ninguna fuerza externa podra mover al enemigo
         rb.isKinematic = true;
 
