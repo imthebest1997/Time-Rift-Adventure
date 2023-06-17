@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     float score = 0;
 
     //Final Boss
-    int numVidas = 6;
+    [SerializeField] float currentHealthFinalBoss = 150f;
+    [SerializeField] float maximumHealthFB = 150f;
 
 
     //Reducir vida al jugador tras caer en una trampa o ser atacado por un enemigo
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
         barHealth.fillAmount = CurrentHealth / maximumHealth;
     }
 
+    public void ReducirVidaFinalBoss(float amount)
+    {
+        CurrentHealthFinalBoss -= amount;
+    }
     public void VaciarVida()
     {
         barHealth.fillAmount = 0f;
@@ -57,13 +62,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int NumVidas
+    public float CurrentHealthFinalBoss
     {
-        get => numVidas;
+        get => currentHealthFinalBoss;
         set
         {
-            numVidas = value;
-            if (numVidas == 0)
+            currentHealthFinalBoss = value;
+            currentHealthFinalBoss = Mathf.Clamp(currentHealthFinalBoss, 0f, maximumHealthFB);//Asegurar que la vida actual este dentro de los valores permitidos (0 y 100)
+
+            if (currentHealthFinalBoss == 0)
             {
                 uiController.ActivateWinnerScreen();
             }

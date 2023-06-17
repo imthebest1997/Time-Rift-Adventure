@@ -45,35 +45,30 @@ public class Player : MonoBehaviour
 
 
         //Salto del personaje
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumpping && (jumpCount < 2 || CheckGround.isGrounded))
+        if (Input.GetKeyDown(KeyCode.Space) && (jumpCount < 2 || CheckGround.isGrounded))
         {
             //Salto consecutivo
             if (jumpCount == 1)
             {
                 rb.velocity = Vector2.zero;
-                rb.AddForce(0.8f * salto * Vector2.up, ForceMode2D.Impulse);
+                rb.AddForce(0.5f * salto * Vector2.up, ForceMode2D.Impulse);
             }
             //Salto Inicial
             else
             {
                 rb.AddForce(Vector2.up * salto, ForceMode2D.Impulse);
             }
-
-            isJumpping = true;
-            animator.SetBool("Saltar", true);
+          
+//            animator.SetBool("Saltar", true);
             jumpCount++;
         }
-
-        //Comprobar si la animación de salto esta en proceso
-        if (isJumpping)
+        //TODO: Optional
+        if (Input.GetKey(KeyCode.Space))
         {
-            jumpTimer += Time.deltaTime;
-            if (jumpTimer >= jumpDuration)
-            {
-                animator.SetBool("Saltar", false);
-                isJumpping = false;
-            }
+            //animator.SetBool("Saltar", true);
+            animator.SetTrigger("Saltar");
         }
+
 
         //Ataque del personaje
         if (Input.GetKeyDown(KeyCode.J) && !isAttacking)
@@ -111,7 +106,6 @@ public class Player : MonoBehaviour
         if (CheckGround.isGrounded)
         {
             animator.SetBool("Saltar", false);
-            isJumpping = false;
             jumpCount = 0; // Reiniciar el contador de saltos cuando toque el suelo
         }
 
@@ -142,8 +136,8 @@ public class Player : MonoBehaviour
         {
             if (isAttacking)
             {
-                gameManager.NumVidas--;
-                if (gameManager.NumVidas == 0)
+                gameManager.ReducirVidaFinalBoss(30f);
+                if (gameManager.CurrentHealthFinalBoss == 0)
                 {
                     Destroy(collision.gameObject);
                 }
@@ -175,26 +169,24 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.CompareTag("FinalBoss"))
         {
-            if (isAttacking)
+/*            if (isAttacking)
             {
-                gameManager.NumVidas--;
-                if(gameManager.NumVidas == 0)
+                gameManager.ReducirVidaFinalBoss(15f);
+                if(gameManager.CurrentHealthFinalBoss == 0)
                 {
                     Destroy(collision.gameObject);
                 }
             }
             else
             {
-                // El jugador ha chocado con el enemigo sin atacar
+*/                // El jugador ha chocado con el enemigo sin atacar
                 gameManager.ReducirVida(15f * Time.deltaTime);
-            }
+//            }
         }
-
     }
 
     void RestoreColliderSize()
     {
         boxCollider.size = originalSizeBC;
     }
-
 }

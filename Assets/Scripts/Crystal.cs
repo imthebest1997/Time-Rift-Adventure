@@ -5,6 +5,8 @@ using UnityEngine;
 public class Crystal : MonoBehaviour
 {
     GameManager gameManager;
+    [SerializeField] AudioClip clip;
+    [SerializeField] AudioController audioController;
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -15,6 +17,7 @@ public class Crystal : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Player"))
             {
+                audioController.PlaySfx(clip);
                 gameManager.UpdateScore(25);//Al tomar un cristal gano 25 puntos
                 Destroy(gameObject);
             }
